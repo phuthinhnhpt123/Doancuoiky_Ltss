@@ -1,6 +1,7 @@
 #ifndef SRC_LAYER_CONV__DEVICE_H_
 #define SRC_LAYER_CONV_DEVICE_H_
 
+#pragma once
 #include <vector>
 #include <chrono>
 #include "../layer.h"

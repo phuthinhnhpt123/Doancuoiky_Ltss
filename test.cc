@@ -37,21 +37,21 @@ int main()
     std::cout << "mnist test number: " << dataset.test_labels.cols() << std::endl;
     
     float accuracy = 0.0;
-    std::cout << "==============================" << std::endl;
-
+    std::cout << "------------------------------" << std::endl;
+	
     // Host - CPU Network
     std::cout << "Test: CPU Network" << std::endl;
     Network dnn1 = dnnNetwork_CPU();
-    dnn1.load_parameters("./weghts/weights-cpu-trained.bin");
+    dnn1.load_parameters("./weghts/fashion_weights.bin");
     dnn1.forward(dataset.test_data);
     accuracy = compute_accuracy(dnn1.output(), dataset.test_labels);
     std::cout << "test accuracy: " << accuracy << std::endl;
-    std::cout << "==============================" << std::endl;
+    std::cout << "------------------------------" << std::endl;
 
     // Device - GPU Network
 	std::cout << "Test: GPU Network" << std::endl;
     Network dnn2 = dnnNetwork_GPU();
-    dnn2.load_parameters("./weights/weights-cpu-trained.bin");
+    dnn2.load_parameters("./weights/fashion_weights.bin");
     dnn2.forward(dataset.test_data);
     accuracy = compute_accuracy(dnn2.output(), dataset.test_labels);
     std::cout << "test accuracy: " << accuracy << std::endl;

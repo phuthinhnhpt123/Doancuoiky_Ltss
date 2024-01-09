@@ -58,7 +58,6 @@ struct GpuTimer
 class GPU_Utils
 {
 public:
-	char *concatStr(const char *s1, const char *s2);
 	void printDeviceInfo();
 };
 

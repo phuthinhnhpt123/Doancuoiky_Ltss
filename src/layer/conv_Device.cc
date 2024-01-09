@@ -52,8 +52,10 @@ void Conv_Device::im2col(const Vector& image, Matrix& data_col) {
 
 void Conv_Device::forward(const Matrix& bottom) {
 	int n_sample = bottom.cols();
-	top.resize(height_out * width_out * channel_out, n_sample);
-	data_cols.resize(n_sample);
+    top.resize(height_out * width_out * channel_out, n_sample);
+    float *input_data = (float *)bottom.data();
+    float *output_data = (float *)top.data();
+    float *weight_data = (float *)weight.data();
 	
 	const int num_samples = n_sample;
     const int input_channel = channel_in;
@@ -62,7 +64,7 @@ void Conv_Device::forward(const Matrix& bottom) {
 	
 	// Call kernel and measure time of 2 convolution layer
 	
-	ConvForward convFordward;
+	ConvForward convforward;
 	
 	if(input_channel == 1)
         std::cout << "1st Convolution Layer: ";
@@ -72,9 +74,9 @@ void Conv_Device::forward(const Matrix& bottom) {
 	GpuTimer timer;
 	// Start layer timer
 	timer.Start();
-    convFordward.conv_forward_gpu(output_data, input_data, weight_data,
-                                  num_samples, output_channel, input_channel,
-                                  height_in, width_in, kernel_height);
+    convforward.conv_forward_gpu(output_data, input_data, weight_data,
+                                 num_samples, output_channel, input_channel,
+                                 height_in, width_in, kernel_size);
 
     // Stop layer timer
     timer.Stop();

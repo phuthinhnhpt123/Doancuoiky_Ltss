@@ -116,7 +116,7 @@ __host__ void ConvForward::conv_forward_gpu(float *output_data, const float *inp
     // Launch kernel
     GpuTimer time_kernel;
 	time_kernel.Start();
-    conv_forward_kernel<<<numBlocksInGrid, numThreadsPerBlock, shmem_size>>>(device_output, device_input, device_weight, num_samples, output_channel, input_channel, height_in, width_in, kernel_height);
+    conv_forward_kernel<<<numBlocksInGrid, numThreadsPerBlock, shmem_size>>>(d_output, d_input, d_weight, num_samples, output_channel, input_channel, height_in, width_in, kernel_height);
     time_kernel.Stop();
     float time_kernel_ms = time_kernel.Elapsed();
     std::cout << "\t - Kernel Time: " << time_kernel_ms << " ms" << std::endl;

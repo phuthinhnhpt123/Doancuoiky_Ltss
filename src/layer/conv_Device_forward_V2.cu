@@ -45,11 +45,7 @@ __global__ void conv_forward_kernel(float *output, const float *input, const flo
             {
                 if (startOfTile_h + i < height && startOfTile_w + j < width)
                 {
-                    input[blockIdx.x * (input_channel * height * width) + 
-					c * (height * width) + (startOfTile_h + i) * width + 
-					startOfTile_w + j] = shared_input[c * (TILE_WIDTH_SHARED + kernel_size - 1) * 
-													(TILE_WIDTH_SHARED + kernel_size - 1) + 
-													i * (TILE_WIDTH_SHARED + kernel_size - 1) + j];
+                    input[blockIdx.x * (input_channel * height * width) + c * (height * width) + (startOfTile_h + i) * width + startOfTile_w + j] = shared_input[c * (TILE_WIDTH_SHARED + kernel_size - 1) * (TILE_WIDTH_SHARED + kernel_size - 1) + i * (TILE_WIDTH_SHARED + kernel_size - 1) + j];
                 }
             }
         }
@@ -110,7 +106,7 @@ __host__ void ConvForward::conv_forward_gpu(float *output_data, const float *inp
 
     numThreadsPerBlock = dim3(TILE_WIDTH_SHARED, TILE_WIDTH_SHARED, 1);
     int shmem_size = input_channel * (TILE_WIDTH_SHARED + kernel_height - 1) * (TILE_WIDTH_SHARED + kernel_height - 1) * sizeof(float);
-	int Z = ((height_out - 1)/TILE_WIDTH+1) * ((width_out - 1)/TILE_WIDTH+1);
+	int Z = ((height_out - 1)/TILE_WIDTH_SHARED+1) * ((width_out - 1)/TILE_WIDTH_SHARED+1);
     numBlocksInGrid = dim3(num_samples, output_channel, Z);
 
     // Launch kernel

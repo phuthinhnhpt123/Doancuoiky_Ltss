@@ -60,7 +60,7 @@ __host__ void ConvForward::conv_forward_gpu(float *output_data, const float *inp
     const int width_out = width_in - kernel_height + 1;
 
     // Allocate device memory
-    float *d_input, *d_output, *d_weight;
+    float *d_input, *d_output;
     cudaMalloc((void **)&d_input, num_samples * input_channel * height_in * width_in * sizeof(float));     // input features map is input_channel
     cudaMalloc((void **)&d_output, num_samples * output_channel * height_out * width_out * sizeof(float)); // output feature map is output_channel
 

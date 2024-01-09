@@ -45,7 +45,9 @@ __global__ void conv_forward_kernel(float *output, const float *input, const flo
             {
                 if (startOfTile_h + i < height && startOfTile_w + j < width)
                 {
-                    input[blockIdx.x * (input_channel * height * width) + c * (height * width) + (startOfTile_h + i) * width + startOfTile_w + j] = shared_input[c * (TILE_WIDTH_SHARED + kernel_size - 1) * (TILE_WIDTH_SHARED + kernel_size - 1) + i * (TILE_WIDTH_SHARED + kernel_size - 1) + j];
+                    shared_input[c * (TILE_WIDTH_SHARED + kernel_size - 1) * 
+					            (TILE_WIDTH_SHARED + kernel_size - 1) + i * 
+								(TILE_WIDTH_SHARED + kernel_size - 1) + j] = input[blockIdx.x * (input_channel * height * width) + c * (height * width) + (startOfTile_h + i) * width + startOfTile_w + j]; 
                 }
             }
         }

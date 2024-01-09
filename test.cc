@@ -42,7 +42,7 @@ int main()
     // Host - CPU Network
     std::cout << "Test: CPU Network" << std::endl;
     Network dnn1 = dnnNetwork_CPU();
-    dnn1.load_weights("./weghts/fashion_weights.bin");
+    dnn1.load_weights("./weights/fashion_weights.bin");
     dnn1.forward(dataset.test_data);
     accuracy = compute_accuracy(dnn1.output(), dataset.test_labels);
     std::cout << "test accuracy: " << accuracy << std::endl;

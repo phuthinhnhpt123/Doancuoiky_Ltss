@@ -55,9 +55,10 @@ void Conv::forward(const Matrix& bottom) {
   top.resize(height_out * width_out * channel_out, n_sample);
   data_cols.resize(n_sample);
   if(channel_in == 1)
-      std::cout << "Convolution c1 - CPU:" << std::endl;
+      std::cout << "1st Convolution Layer: ";
   else
-      std::cout << "Convolution c3 - CPU:" << std::endl;
+      std::cout << "2nd Convolution Layer: ";
+  
   GpuTimer timer;
   timer.Start();
   for (int i = 0; i < n_sample; i ++) {
@@ -72,7 +73,7 @@ void Conv::forward(const Matrix& bottom) {
   }
   timer.Stop();
   float duration_layer = timer.Elapsed();
-  std::cout << "\t - Layer Time: " << duration_layer << " ms" << std::endl;
+  std::cout << "\tLayer Time: " << duration_layer << " ms" << std::endl;
 }
 
 // col2im, used for grad_bottom

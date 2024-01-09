@@ -5,6 +5,8 @@
 #define TILE_WIDTH_SHARED_C1 16
 #define TILE_WIDTH_SHARED_C3 12
 
+// This optimized version using shared memory 
+
 __global__ void conv_forward_kernel(float *output, const float *input, const float *kernel,
                                     const int num_samples, const int output_channel, const int input_channel,
                                     const int height, const int width, const int kernel_size)

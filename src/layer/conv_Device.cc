@@ -50,32 +50,6 @@ void Conv_Device::im2col(const Vector& image, Matrix& data_col) {
   }
 }
 
-// void Conv::forward(const Matrix& bottom) {
-//   int n_sample = bottom.cols();
-//   top.resize(height_out * width_out * channel_out, n_sample);
-//   data_cols.resize(n_sample);
-//   for (int i = 0; i < n_sample; i ++) {
-//     // im2col
-//     Matrix data_col;
-    
-//     // Begin timing the CPU implementation
-//     timespec ts, te;
-//     clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
-
-//     im2col(bottom.col(i), data_col);
-//     // conv by product
-//     Matrix result = data_col * weight;  // result: (hw_out, channel_out)
-
-//     // End timing the CPU implementation
-//     clock_gettime(CLOCK_MONOTONIC_RAW, &te);
-//     std::cout << "Time for image size: " << height_in << " | ellapsed time: " << cpu_time1(&ts, &te) << std::endl;
-
-//     data_cols[i] = data_col;
-//     result.rowwise() += bias.transpose();
-//     top.col(i) = Eigen::Map<Vector>(result.data(), result.size());
-//   }
-// }
-
 void Conv_Device::forward(const Matrix& bottom) {
 	int n_sample = bottom.cols();
 	top.resize(height_out * width_out * channel_out, n_sample);
@@ -89,6 +63,7 @@ void Conv_Device::forward(const Matrix& bottom) {
 	// Call kernel and measure time of 2 convolution layer
 	
 	ConvForward convFordward;
+	
 	if(input_channel == 1)
         std::cout << "1st Convolution Layer: ";
     else
@@ -97,9 +72,9 @@ void Conv_Device::forward(const Matrix& bottom) {
 	GpuTimer timer;
 	// Start layer timer
 	timer.Start();
-    gpuInterface.conv_forward_gpu_full(output_data, input_data, weight_data,
-                                    num_samples, output_channel, input_channel,
-                                    height_in, width_in, kernel_height);
+    convFordward.conv_forward_gpu(output_data, input_data, weight_data,
+                                  num_samples, output_channel, input_channel,
+                                  height_in, width_in, kernel_height);
 
     // Stop layer timer
     timer.Stop();

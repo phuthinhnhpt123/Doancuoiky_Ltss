@@ -19,7 +19,7 @@
 #include "src/optimizer.h"
 #include "src/optimizer/sgd.h"
 #include "src/layer/gpu_utils.h"
-#include "dnnNetwork.h"
+#include "Net.h"
 
 
 int main()

@@ -2,6 +2,7 @@
 #define SRC_LAYER_CONV_DEVICE_H_
 
 #include <vector>
+#include <chrono>
 #include "../layer.h"
 #include "../gpu.utils.h"
 

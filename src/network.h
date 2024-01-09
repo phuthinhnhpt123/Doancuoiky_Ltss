@@ -3,6 +3,9 @@
 
 #include <stdlib.h>
 #include <vector>
+#include <string>
+#include <fstream>
+
 #include "./layer.h"
 #include "./loss.h"
 #include "./optimizer.h"

@@ -29,7 +29,7 @@ int main()
     gpu_utils.printDeviceInfo();    
     
     // Load data
-    MNIST dataset("./data/fashion/");
+    MNIST dataset("../data/fashion-mnist/");
     dataset.read();
     int n_train = dataset.train_data.cols();
     int dim_in = dataset.train_data.rows();

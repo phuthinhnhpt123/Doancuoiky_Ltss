@@ -1,4 +1,4 @@
-#include "conv_Device.h"
+#include "./conv_Device.h"
 #include <math.h>
 #include <iostream>
 #include <typeinfo>

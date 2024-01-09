@@ -6,7 +6,7 @@
 #include <math.h>
 #include <iostream>
 #include <chrono>
-#include "./custom/gpu_utils.h"
+#include "./gpu_utils.h"
 
 
 class Conv: public Layer {

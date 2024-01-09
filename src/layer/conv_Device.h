@@ -4,7 +4,7 @@
 #include <vector>
 #include <chrono>
 #include "../layer.h"
-#include "../gpu.utils.h"
+#include "../gpu_utils.h"
 
 class Conv_Device: public Layer {
  private:

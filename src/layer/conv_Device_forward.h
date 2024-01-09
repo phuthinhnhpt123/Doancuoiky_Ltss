@@ -1,6 +1,6 @@
 #ifndef SRC_LAYER_CONV_DEVICE_FORWARD_H
 #define SRC_LAYER_CONV_DEVICE_FORWARD_H
-#include "./gpu-utils.h"
+#include "./gpu_utils.h"
 
 class ConvForward
 {

@@ -1,4 +1,4 @@
-#include "gpu-utils.h"
+#include "gpu_utils.h"
 
 void GPU_Utils::printDeviceInfo()
 {
